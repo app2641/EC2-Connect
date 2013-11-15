@@ -1,0 +1,6 @@
+
+.DS_Store
+
+config/aws.ini
+
+library/composer/vendor
