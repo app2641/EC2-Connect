@@ -51,6 +51,7 @@ class EC2controller
         $response  = $this->ec2->describeInstances();
         $instances = $response->getAll(array('Reservations'));
         $data      = array();
+        $status    = array();
 
         // Nameを取得する
         foreach ($instances['Reservations'] as $instance) {
@@ -59,12 +60,14 @@ class EC2controller
                     $data[] = $tag['Value'];
                 }
             }
+
+            $status[] = $instance['Instances'][0]['State']['Name'];
         }
 
 
         // ターミナルに表示
         foreach ($data as $num => $val) {
-            echo $num.':  '.$val.PHP_EOL;
+            echo $num.':  '.$status[$num].'  '.$val.PHP_EOL;
         }
     }
 
@@ -84,10 +87,17 @@ class EC2controller
 
         foreach ($instances['Reservations'] as $i => $instance) {
             if ($i == $number) {
+                if ($instance['Instances'][0]['State']['Name'] != 'running') {
+                    echo 'ステータスが running ではありません'.PHP_EOL;
+                    break;
+                }
+
                 $dns_name = $instance['Instances'][0]['PublicDnsName'];
                 $command = 'ssh ec2-user@'.$dns_name.' -i '.$this->ssh_key;
-                echo PHP_EOL.$command.PHP_EOL.PHP_EOL;
-                continue;
+                touch ('/tmp/EC2-Connect.query');
+                file_put_contents('/tmp/EC2-Connect.query', $command);
+                exec('cat /tmp/EC2-Connect.query | pbcopy');
+                break;
             }
         }
     }
