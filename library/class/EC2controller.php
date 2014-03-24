@@ -93,12 +93,38 @@ class EC2controller
                 }
 
                 $dns_name = $instance['Instances'][0]['PublicDnsName'];
-                $command = 'ssh ec2-user@'.$dns_name.' -i '.$this->ssh_key;
-                touch ('/tmp/EC2-Connect.query');
-                file_put_contents('/tmp/EC2-Connect.query', $command);
-                exec('cat /tmp/EC2-Connect.query | pbcopy');
+                $this->_copyCommand($dns_name);
                 break;
             }
         }
+    }
+
+
+
+    /**
+     * DNSホスト名からEC2インスタンスに接続する
+     *
+     * @param string $host  ホスト名
+     * @return void
+     **/
+    public function connectHost ($host)
+    {
+        $this->_copyCommand($host);
+    }
+
+
+
+    /**
+     * 指定したDNSホストのSSHコマンドをコピーする
+     *
+     * @param string $dns_name  DNSホスト名
+     * @return void
+     **/
+    private function _copyCommand ($dns_name)
+    {
+        $command = 'ssh ec2-user@'.$dns_name.' -i '.$this->ssh_key;
+        touch ('/tmp/EC2-Connect.query');
+        file_put_contents('/tmp/EC2-Connect.query', $command);
+        exec('cat /tmp/EC2-Connect.query | pbcopy');
     }
 }
