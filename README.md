@@ -23,22 +23,23 @@ $ EC2-Connect
 このように現在稼働しているインスタンスが表示される。  
 今回表示しているのはサンプルのインスタンスだ。  
 
-では、WebServiceApp インスタンスにログインしてみよう。
+では、WebServiceApp インスタンスにログインしてみよう。  
 このようにコマンドを撃て。
 
 ```
 $ EC2-Connect 0
 ```
 
-引数に与えた 0 は先刻表示したインスタンス群の一番左に記載されている数字だ。
-数字で対象のインスタンスを指定することが出来る。
-このままインスタンスにログイン出来れば素晴らしいが、そこまでは出来ない。
-煩わしさを多少軽減するツールだからだ。
+引数に与えた 0 は先刻表示したインスタンス群の一番左に記載されている数字だ。  
+数字で対象のインスタンスを指定することが出来る。  
+このままインスタンスにログイン出来れば素晴らしいが、そこまでは出来ない。  
+煩わしさを多少軽減するツールだからだ。  
 
 おもむろに Ctrl + v を押せ。  
 こうなる。
 
-``` $ ssh ec2-user@ec2-xxx-xx-xx-xx.ap-northeast-1.compute.amazonaws.com -i /Users/hoge/.ssh/a_1.pem
+```
+$ ssh ec2-user@ec2-xxx-xx-xx-xx.ap-northeast-1.compute.amazonaws.com -i /Users/hoge/.ssh/a_1.pem
 ```
 
 ENTER を押せばインスタンスにログイン可能だ。  
@@ -51,7 +52,7 @@ $ EC2-Connect WebService
 $ EC2-Connect ec2-user@ec2-xxx-xx-xx-xx.ap-northeast-1.compute.amazonaws.com
 ```
 
-どちらも同じでログインするための SSH コマンドがクリップボードに格納される。
+どちらも同じでログインするための SSH コマンドがクリップボードに格納される。  
 どうだろう、煩わしさが多少軽減したのではないだろうか。
 
 
