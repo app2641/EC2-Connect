@@ -2,7 +2,7 @@ EC2-Connect
 =============
 
 Ec2-Connect は AmazonWebService EC2 インスタンスへ SSH ログインするためのヘルパーツールである。  
-ElasticIP のない EC2 インスタンスへのログインは常に煩わしさつきまとう。  
+ElasticIP のない EC2 インスタンスへのログインは常に煩わしさがつきまとう。  
 その煩わしさを多少軽減するツールとして利用すると良い。
 
 
@@ -45,7 +45,7 @@ $ ssh ec2-user@ec2-xxx-xx-xx-xx.ap-northeast-1.compute.amazonaws.com -i /Users/h
 ENTER を押せばインスタンスにログイン可能だ。  
 要するに、SSH のコマンドがクリップボードに格納されている。
 
-また、こんな指定の仕方も可能だ。
+こんな指定の仕方も可能だ。
 
 ```
 $ EC2-Connect WebService
@@ -71,13 +71,13 @@ $ composer.phar install
 
 ### aws.ini
 AWS の認証キーを指定しなければもちろん使えない。  
-オリジナルの設定ファイルをコピーしろ。
+オリジナルの設定ファイルをコピーして書き換えろ。
 
 ```
 $ cp config/aws.ini.orig config/aws.ini
 ```
 
-ファイルを開いて設定を記載しろ。
+ファイルを開いて設定を記載しろ。  
 sshkey には使用する ssh キーへのパスを指定するのだ。
 
 ```
@@ -86,16 +86,16 @@ secret=xxxxxxxxxxxxxxxx
 sshkey=/Users/hoge/.ssh/a_1.pem
 ```
 
-これで準備完了だ。
-まず、このコマンドを何も考えずに撃て。
+これで準備完了だ。  
+まずこのコマンドを何も考えずに撃て。
 
 ```
 $ EC2-Connect
 0:  running  WebServiceApp  
 1:  running  DatabaseApp  
-3:  running  ScaleOutApp  
-4:  stopped  TestServer  
+2:  running  ScaleOutApp  
+3:  stopped  TestServer  
 ```
 
 どうだ。  
-多少煩わしさが軽減出来ただろう。
+多少煩わしさが軽減出来ただろう？
