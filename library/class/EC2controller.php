@@ -55,6 +55,8 @@ class EC2controller
 
         // Nameを取得する
         foreach ($instances['Reservations'] as $instance) {
+            if (! isset($instance['Instances'][0]['Tags'])) continue;
+
             foreach ($instance['Instances'][0]['Tags'] as $tag) {
                 if ($tag['Key'] == 'Name') {
                     $data[] = $tag['Value'];
@@ -67,6 +69,7 @@ class EC2controller
 
         // ターミナルに表示
         foreach ($data as $num => $val) {
+            $val = (is_array($val))? '': $val;
             echo $num.':  '.$status[$num].'  '.$val.PHP_EOL;
         }
     }
